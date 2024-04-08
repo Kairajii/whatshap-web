@@ -43,14 +43,13 @@ io.on('connection', (socket) => {
       const user = await User.findById(userId);
       if (user) {
         users[userId] = socket.id;
-        socket.join(userId.toString()); // Join room based on user ID
+        socket.join(userId.toString());
       }
     });
   
     socket.on('message', async (data) => {
       const { from, to, message } = data;
   
-      // Emit the message to both users in the room
       io.to(from).to(to).emit('message', { from, message });
     });
   

@@ -8,11 +8,14 @@ import { AiOutlineMessage } from "react-icons/ai";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { CiSearch } from "react-icons/ci";
 import { ALL_USERS } from "@/services/user.service";
+import ChatComponent from "./ChatComponent";
+import { useSelectedUser } from "@/context/chatProvider";
 
 
 const Sidebar = () => {
   const [search,setSearch] = useState("")
   const [allUsersDetails,setAllUserDetails] = useState([]);
+  const { setSelectedUser } : any = useSelectedUser();
   const fetchAllUsers=async()=>{
     const allUsers = await ALL_USERS(search);
     if(allUsers){
@@ -25,6 +28,9 @@ const Sidebar = () => {
   useEffect(()=>{
     fetchAllUsers()
   },[search])
+  const handleUserClick = (user:any) => {
+    setSelectedUser(user);
+  }
   return (
     <div className="w-1/4 h-full flex flex-col">
       {/* TOP BAr */}
@@ -64,7 +70,7 @@ const Sidebar = () => {
       <div className="w-full h-full bg-white overflow-y-scroll scrollbar-thin scrollbar-thumb-black scrollbar-track-white">
         <div className="h-[1500px] w-full px-3 py-2">
           {allUsersDetails?.map((item:any, index:any) => (
-            <div className="w-full my-3 flex gap-x-5 py-2 px-3 bg-[#f0faf7] cursor-pointer">
+            <div className="w-full my-3 flex gap-x-5 py-2 px-3 bg-[#f0faf7] cursor-pointer" onClick={() => handleUserClick(item)}>
               <Avatar>
                 <AvatarImage src={item?.pic} />
               </Avatar>
@@ -74,6 +80,7 @@ const Sidebar = () => {
         </div>
       </div>
     </div>
+
   );
 };
 

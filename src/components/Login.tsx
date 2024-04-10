@@ -18,9 +18,12 @@ import {
 import { useState } from "react"
 import { LOGIN_USERS, REGISTER_USERS } from "@/services/user.service"
 import { useRouter } from "next/router"
+import { useToast } from "./ui/use-toast"
+import { ToastAction } from "./ui/toast"
 
 export function Login() {
   const route = useRouter();
+  const { toast } = useToast()
   const [register,setRegister] = useState({
     name: "",
     email: "",
@@ -50,6 +53,9 @@ export function Login() {
     const user  = await REGISTER_USERS(register);
     if(user){
       console.log("User has been successfully register");
+      toast({
+        description: "User has been successfully register",
+      })
       setRegister({
         name: '',
         email: '',
@@ -57,6 +63,12 @@ export function Login() {
       });
     }else{
       console.log("Something went wrong on register");
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your request.",
+        action: <ToastAction altText="Try again">Try again</ToastAction>,
+      })
     }
     
   };
@@ -68,6 +80,9 @@ export function Login() {
       localStorage.setItem("userInfo", JSON.stringify(user));
       localStorage.setItem('token', user.token);
       console.log("User has been successfully login");
+      toast({
+        description: "User has been successfully login",
+      })
       const isUser = localStorage.getItem("token");
       setLogin({
         email: '',
@@ -77,6 +92,12 @@ export function Login() {
 
     }else{
       console.log("Something went wrong on login");
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your request.",
+        action: <ToastAction altText="Try again">Try again</ToastAction>,
+      })
     }
   }
 

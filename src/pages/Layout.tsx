@@ -3,6 +3,7 @@ import Sidebar from '@/components/Sidebar';
 import { SelectedUserProvider } from '@/context/chatProvider';
 import { useRouter } from 'next/router';
 import React, { ReactNode, useEffect } from 'react'
+import { Toaster } from "@/components/ui/toaster"
 
 interface LayoutProps {
     children: ReactNode;
@@ -27,6 +28,7 @@ const Layout = ({children}: LayoutProps) => {
       <div className=' rounded-lg w-full h-full flex gap-x-5'>
         <Sidebar />
         {children}
+        <Toaster />
       </div>
     </div>
     </SelectedUserProvider>

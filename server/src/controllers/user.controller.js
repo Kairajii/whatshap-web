@@ -44,9 +44,9 @@ const registerUser = asyncHandler(async (req, res) => {
   const loginUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
   
-    const user = await User.findOne({ email });
-  
-    if (user) successDataResponse(req,res,{
+    const user = await User.findOne({ email:email,password:password });
+
+    if (user ) successDataResponse(req,res,{
         _id: user._id,
         name: user.name,
         email: user.email,

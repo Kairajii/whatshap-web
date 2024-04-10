@@ -10,6 +10,7 @@ import { CiSearch } from "react-icons/ci";
 import { ALL_USERS } from "@/services/user.service";
 import ChatComponent from "./ChatComponent";
 import { useSelectedUser } from "@/context/chatProvider";
+import { LogoutDropdown } from "./LogoutDropdown";
 
 
 const Sidebar = () => {
@@ -52,7 +53,7 @@ const Sidebar = () => {
             <TbMessage2Plus className="w-6 h-6" />
           </Toggle>
           <Toggle>
-            <BiDotsVerticalRounded className="w-6 h-6" />
+            <LogoutDropdown />
           </Toggle>
         </div>
       </div>

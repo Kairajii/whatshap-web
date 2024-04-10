@@ -29,14 +29,16 @@ const ChatComponent = ({ user }:any) => {
 console.log("fromUser",fromUser._id)
 console.log("toUser",user._id)
 const sendMessage = () => {
+  if (newMessage.trim() !== '') {
     socket.emit('message', {
       from: fromUser._id,
       to: user._id,
       message: newMessage,
     });
-  
+
     setNewMessage('');
-  };
+  }
+};
 
   return (
     <div className='w-[95%] p-4 h-full mx-auto flex flex-col'>

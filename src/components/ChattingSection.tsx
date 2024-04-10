@@ -26,7 +26,9 @@ const ChattingSection = () => {
         </Avatar>
         <h1 className='text-black text-xl'>{userName}</h1>
       </div>
-      <ChatComponent user={selectedUser}/>
+      
+         <ChatComponent user={selectedUser}/> 
+      
     </div>
   )
 }

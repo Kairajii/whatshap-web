@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Avatar } from './ui/avatar';
 import { AvatarImage } from '@radix-ui/react-avatar';
 import { io } from 'socket.io-client';
+import { Button } from './ui/button';
+import { AiOutlineSend } from "react-icons/ai";
 
 const socket = io('http://localhost:5000');
 
@@ -69,9 +71,8 @@ const sendMessage = () => {
           onChange={(e) => setNewMessage(e.target.value)}
           className='flex-grow outline-none bg-transparent mr-2'
         />
-        <button className='bg-blue-500 text-white px-4 py-2 rounded' onClick={sendMessage}>
-          Send
-        </button>
+       
+        <Button variant="secondary" onClick={sendMessage}><AiOutlineSend className='h-full w-full'/></Button>
       </div>
     </div>
   );
